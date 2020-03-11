@@ -12,7 +12,11 @@ elif withdraw % 5 != 0:
 else:
     cash = {}
     for value in list(banknotes.keys())[::-1]:
-        if withdraw < value*banknotes[value] and withdraw // value != 0:
-            cash[value] = withdraw // value
-            withdraw -= value * (withdraw // value)
-    print(cash)
+        if withdraw // value != 0:
+            if withdraw >= value*banknotes[value]:
+                cash[value] = banknotes[value]
+                withdraw -= value * banknotes[value]
+            else:
+                cash[value] = withdraw // value
+                withdraw -= value * (withdraw // value)
+    print("cash", cash)
